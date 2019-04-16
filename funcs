@@ -1,0 +1,52 @@
+1） perror 
+CODE:
+#include <stdio.h>
+int main(void)
+{
+        FILE *fp ;
+        perror("no error");
+        fp = fopen( "/just/test", "r+" );
+        if ( NULL == fp )
+        {
+                perror("/just/test");
+        }
+        printf("ok\n");
+        return 0;
+}
+OUTPUT:
+no error: Success
+/just/test: No such file or directory
+ok
+说明：
+void perror(const char * str);
+把当前错误消息输出到标准错误stderr。首先输出字符串str，后跟一个冒号加一个空格，再是错误信息。
+
+2) rename
+CODE:
+#include <stdio.h>
+int main(){
+        int a,b,c;
+        a=rename("./test3.c","./test3_rename.c"); //将test3.c重命名为test3_rename.c
+        printf("%d\n",a);
+        b=rename("./test3.c","./keke/hehe.c"); //keke目录不存在
+        printf("%d\n",b);
+        c=rename("test3_rename.c","./gege/test3_rename_rename.c");//将test3_rename.c移动到gege中，并且重新命名为test3_rename_rename.c
+        printf("%d\n",c);
+        return 0;
+}
+OUTPUT:
+0
+-1
+0
+说明：
+int rename(const char * old, const char *new);
+成功返回0，失败返回1。
+1> 重命名文件：
+如果new指定的文件存在，则会被old覆盖。
+如果new与old不在一个目录下，则相当于移动文件。
+2>重命名目录：
+如果new和old都为目录，则重命名目录。
+如果new指定的目录存在且为空目录，则先将newn删除再将old重命名为new。如果new指定的目录存在不为空，则重命名失败。
+对于new和old两个目录，必须有写权限。
+重命名目录时，new不能包含old作为其路径前缀。例如，不能将/usr更名为/usr/hehe/test。
+
