@@ -1,0 +1,27 @@
+1.errno表示错误代码。 记录系统的最后一次错误代码。代码是一个int型的值，在errno.h中定义。系统每一次出错都会对应一个出错代码，例如12表示“Cannot allocate memory"。
+
+2.stderr 是linux(unix)标准出错输出。linux中的一个进程启动时，都会打开三个文件：标准输入、标准输出和标准出错处理。通常这三个文件都与终端联 系。这三个文件分别对应文件描述符0、1、2。系队统自定义了三个文件指针stdin、stdout、stderr，分别指向标准输入、标准输出和标准出 错输出。通常结合fprintf使用：fprintf(stderr,"error message")。
+
+
+3.perror是错误输出函数，在标准输出设备上输出一个错误信息。是对errno的封装。例如perror("fun"),其输出为：fun：后面跟着错误信息(加一个换行符)。包含头文件stdio.h.
+
+
+4.stderror是通过参数errno，返回错误信息。即stderror(errno)，可用printf函数打印出错信息，用于调试。包含头文件string.h。
+
+1. fprintf（格式化输出数据至文件）
+表头文件: #include<stdio.h>
+定义函数: int fprintf(FILE * stream, const char * format,.......);
+函数说明: fprintf（）会根据参数format 字符串来转换并格式化数据，然后将结果输出到参数stream 指定的文件中，直到出现字符串结束（‘\0‘）为止。
+返回值:   关于参数 format字符串的格式请参考printf（）。成功则返回实际输出的字符数，失败则返回-1，错误原因存于errno中。
+
+2. fscanf（格式化字符串输入）
+表头文件: #include<stdio.h>
+定义函数: int fscanf(FILE * stream ,const char *format,....);
+函数说明: fscanf（）会自参数stream的文件流中读取字符串，再根据参数format字符串来转换并格式化数据。格式转换形式请参考scanf（）。转换后的结构存于对应的参数内。
+返回值:   成功则返回参数数目，失败则返回-1，错误原因存于errno中。
+--------------------- 
+作者：plf1943 
+来源：CSDN 
+原文：https://blog.csdn.net/plf1943/article/details/8262095/ 
+版权声明：本文为博主原创文章，转载请附上博文链接！
+
