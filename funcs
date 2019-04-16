@@ -61,5 +61,19 @@ int main(){
 OUTPUT:
 drwxrwxr-x 2 wu_jinhua0101 wu_jinhua0101         10 Apr 17  2019 yy
 说明：
+int mkdir(const char *pathname,mode_t mode);
 一般头文件在/usr/include下面，这里是标准C程序头文件，如果你的头文件前加了 <sys/*>,那说明这是系统调用函数头文件，其在/usr/include/sys下面。
+若调用成功，mkdir将更新该目录的st_atime、st_ctime和st_mtime，同时更新其父目录的st_ctime和st_mtime，然后返回0。若调用失败，mkdir将返回-1.
+
+4）rmdir
+CODE:
+#include <unistd.h>
+int main() {
+        rmdir("yy");
+        return 0;
+}
+说明：
+int rmdir(const char *pathname);
+使用rmdir函数时，目录必须为空，否则调用失败，函数返回-1。成功时，函数返回0。
+
 
