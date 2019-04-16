@@ -50,3 +50,16 @@ int rename(const char * old, const char *new);
 对于new和old两个目录，必须有写权限。
 重命名目录时，new不能包含old作为其路径前缀。例如，不能将/usr更名为/usr/hehe/test。
 
+3）mkdir
+CODE:
+#include <sys/stat.h>
+#include <sys/types.h>
+int main(){
+        mkdir("yy",S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+        return 0;
+}
+OUTPUT:
+drwxrwxr-x 2 wu_jinhua0101 wu_jinhua0101         10 Apr 17  2019 yy
+说明：
+一般头文件在/usr/include下面，这里是标准C程序头文件，如果你的头文件前加了 <sys/*>,那说明这是系统调用函数头文件，其在/usr/include/sys下面。
+
